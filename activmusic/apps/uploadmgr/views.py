@@ -11,7 +11,9 @@ from activmusic.apps.uploadmgr.models import AudioMedia
 def playlist(request, slug):
     output = ["#EXTM3U"]
 
-    medias = list(AudioMedia.objects.filter(owner__playlist__slug=slug))
+    medias = list(AudioMedia.objects.filter(owner__playlist__slug=slug)
+                  .exclude(file__isnull=True)
+                  .exclude(file=''))
     shuffle(medias)
 
     output += ['#EXTINF:{},{}\r\n{}'.format(x.duration,
