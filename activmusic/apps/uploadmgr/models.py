@@ -13,6 +13,13 @@ class AudioMedia(models.Model):
     url = models.URLField()
     name = models.CharField(max_length=1000, null=True, blank=True)
     file = models.FileField(null=True, blank=True, upload_to=upload_to)
+    duration = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name if self.name is not None and self.name != '' else self.url
+
+
+class Playlist(models.Model):
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100)
+    members = models.ManyToManyField(settings.AUTH_USER_MODEL)

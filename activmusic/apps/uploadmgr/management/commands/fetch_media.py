@@ -69,6 +69,7 @@ class Command(BaseCommand):
                                 result.get('title')
                             ), File(f))
                         media.name = result.get('title')
+                        media.duration = result.get('duration')
                         media.save()
         finally:
             rmtree(dir_name)

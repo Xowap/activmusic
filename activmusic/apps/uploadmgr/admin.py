@@ -5,9 +5,17 @@
 
 
 from django.contrib import admin
-from activmusic.apps.uploadmgr.models import AudioMedia
+from activmusic.apps.uploadmgr.models import AudioMedia, Playlist
 
 
 @admin.register(AudioMedia)
 class AudioMediaAdmin(admin.ModelAdmin):
     list_display = ('url', 'owner', 'name')
+
+
+@admin.register(Playlist)
+class PlaylistAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+    prepopulated_fields = {
+        'slug': ('name',),
+    }

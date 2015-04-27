@@ -28,3 +28,6 @@ celerybeat-schedule
 
 # Local configuration
 /env
+
+# Generated audio files
+*.ogg
