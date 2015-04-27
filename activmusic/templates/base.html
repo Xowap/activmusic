@@ -1,0 +1,21 @@
+{% load pipeline %}
+{% load staticfiles %}
+{% load metron_tags %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>{% block head_title %}Base template{% endblock head_title %}</title>
+
+    {% stylesheet 'bootstrap' %}
+</head>
+<body>
+    <div class="container">
+        {% block content %}
+        <h1>Base template</h1>
+        {% endblock content %}
+    </div>
+
+    {% analytics %}
+</body>
+</html>

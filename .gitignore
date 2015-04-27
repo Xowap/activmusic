@@ -1,0 +1,30 @@
+# Python bytecode:
+*.py[co]
+
+# Compiled LESS
+*.css
+
+# Packaging files:
+*.egg*
+
+# Editor temp files:
+.idea
+*.swp
+*~
+*.un~
+
+# Sphinx docs:
+build
+
+# Bower dependencies
+/activeseed/components
+/activeseed/assets
+
+# SQLite3 database files:
+*.db
+
+# Celerybeat scheduler file:
+celerybeat-schedule
+
+# Local configuration
+/env

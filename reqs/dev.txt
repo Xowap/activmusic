@@ -1,0 +1,2 @@
+-r common.txt
+ipython==2.3.1

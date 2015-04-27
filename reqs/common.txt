@@ -1,0 +1,14 @@
+Django==1.8
+django-allauth==0.19.0
+django-bower==5.0.1
+django-crispy-forms==1.4.0
+django-pipeline==1.5.0
+django-uuid-upload-path==1.0.0
+dj-database-url==0.3.0
+dj-static==0.0.6
+psycopg2==2.5.4
+pylesswrap==0.1.4
+raven==5.1.1
+tendo==0.2.7
+Unipath==1.0
+youtube-dl==2015.4.26
