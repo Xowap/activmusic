@@ -5,6 +5,7 @@
 
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+from django.conf import settings
 
 
 class AccountAdapter(DefaultAccountAdapter):
@@ -31,4 +32,6 @@ class AccountAdapter(DefaultAccountAdapter):
 
 
 class SocialAccountAdapter(DefaultSocialAccountAdapter):
-    pass
+    def is_open_for_signup(self, request, sociallogin):
+        return settings.GOOGLE_DOMAIN_RESTRICTION is None \
+            or sociallogin.user.email.endswith('@{}'.format(settings.GOOGLE_DOMAIN_RESTRICTION))

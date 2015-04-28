@@ -11,6 +11,6 @@ BOWER_INSTALLED_APPS = (
     'angular#~1.3',
     'angular-animate#~1.3',
     'angular-cookies#~1.3',
-    'bootstrap#~3.2',
+    'bootstrap#~3.3',
     'lesshat#~3.0',
 )

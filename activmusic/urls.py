@@ -11,6 +11,7 @@ from django.contrib import admin
 urlpatterns = patterns(
     '',
 
+    url(r'^$', 'activmusic.apps.register.views.landing'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/', include('activmusic.apps.register.urls')),

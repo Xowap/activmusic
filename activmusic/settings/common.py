@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -138,6 +139,9 @@ METRON_SETTINGS = {
 
 # Forms
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Authentication limitation
+GOOGLE_DOMAIN_RESTRICTION = getenv('GOOGLE_DOMAIN_RESTRICTION')
 
 # Other common config files
 from .bower import *
