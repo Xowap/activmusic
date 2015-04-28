@@ -6,7 +6,8 @@
 from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse
 from random import shuffle
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from activmusic.apps.uploadmgr.forms import AudioMediaForm
 from activmusic.apps.uploadmgr.models import AudioMedia
 
 
@@ -30,4 +31,20 @@ def playlist(request, slug):
 def music_list(request):
     return render(request, 'uploadmgr/index.html', {
         'medias': AudioMedia.objects.filter(owner=request.user)
+    })
+
+
+@login_required
+def music_add(request):
+    if request.method == 'POST':
+        form = AudioMediaForm(request.user, request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('music_list')
+    else:
+        form = AudioMediaForm(request.user)
+
+    return render(request, 'uploadmgr/add.html', {
+        'form': form
     })

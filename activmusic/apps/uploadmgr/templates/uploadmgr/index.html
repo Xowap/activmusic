@@ -4,8 +4,8 @@
 
 {% block content %}
     <h1>
-        My uploads
-
+        {% trans "My uploads" %}
+        <a href="{% url 'music_add' %}" class="btn btn-primary">Add Another</a>
     </h1>
 
     {% for media in medias %}
@@ -18,8 +18,8 @@
         </tr>
     {% endif %}
         <tr>
-            <td>{{ media.name }}</td>
-            <td><a href="{{ media.url }}">{{ media.url }}</a></td>
+            <td>{{ media.name|default:"[not downloaded yet]" }}</td>
+            <td><a href="{{ media.url }}" target="_blank">{{ media.url }}</a></td>
             <td><input type="checkbox"/></td>
         </tr>
     {% if forloop.last %}

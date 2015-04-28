@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>
+        {% trans "Upload Something" %}
+    </h1>
+
+    <form class="form-horizontal"
+          method="post"
+          action="{% url 'music_add' %}">
+        {% crispy form %}
+    </form>
+{% endblock %}
