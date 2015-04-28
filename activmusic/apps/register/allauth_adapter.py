@@ -6,6 +6,7 @@
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 
 class AccountAdapter(DefaultAccountAdapter):
@@ -29,6 +30,9 @@ class AccountAdapter(DefaultAccountAdapter):
     def add_message(self, request, level, message_template,
                     message_context=None, extra_tags=''):
         pass
+
+    def get_login_redirect_url(self, request):
+        return reverse('music_list')
 
 
 class SocialAccountAdapter(DefaultSocialAccountAdapter):

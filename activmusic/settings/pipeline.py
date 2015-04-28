@@ -11,6 +11,7 @@ PIPELINE_CSS = {
     'bootstrap': {
         'source_filenames': (
             'activmusic/bootstrap/bootstrap.less',
+            'activmusic/style/uploadmgr.less',
         ),
         'output_filename': 'css/bootstrap.css',
     },

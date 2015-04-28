@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+    <h1>
+        My uploads
+
+    </h1>
+
+    {% for media in medias %}
+    {% if forloop.first %}
+    <table class="table">
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "URL" %}</th>
+            <th class="table-col-delete">{% trans "Delete" %}</th>
+        </tr>
+    {% endif %}
+        <tr>
+            <td>{{ media.name }}</td>
+            <td><a href="{{ media.url }}">{{ media.url }}</a></td>
+            <td><input type="checkbox"/></td>
+        </tr>
+    {% if forloop.last %}
+    </table>
+    {% endif %}
+    {% empty %}
+        <p>{% trans "You don't have uploaded anything yet!" %}</p>
+    {% endfor %}
+{% endblock %}

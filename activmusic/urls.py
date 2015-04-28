@@ -13,6 +13,7 @@ urlpatterns = patterns(
 
     url(r'^$', 'activmusic.apps.register.views.landing'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^uploadmgr/', include('activmusic.apps.uploadmgr.urls')),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/', include('activmusic.apps.register.urls')),
     url(r'^playlists/(?P<slug>[^/]+).m3u8', 'activmusic.apps.uploadmgr.views.playlist',

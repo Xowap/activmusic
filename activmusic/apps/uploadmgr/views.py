@@ -3,8 +3,10 @@
 # activmusic
 # (c) 2014 ActivKonnect
 
+from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponse
 from random import shuffle
+from django.shortcuts import render
 from activmusic.apps.uploadmgr.models import AudioMedia
 
 
@@ -22,3 +24,10 @@ def playlist(request, slug):
                for x in medias]
 
     return HttpResponse('\r\n'.join(output).encode('utf-8'), content_type='application/x-mpegurl')
+
+
+@login_required
+def music_list(request):
+    return render(request, 'uploadmgr/index.html', {
+        'medias': AudioMedia.objects.filter(owner=request.user)
+    })

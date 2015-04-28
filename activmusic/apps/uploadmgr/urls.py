@@ -4,9 +4,9 @@
 # (c) 2014 ActivKonnect
 
 from django.conf.urls import patterns, url
-from django.conf.urls.static import static
-from django.conf import settings
 
 urlpatterns = patterns(
-    'activmusic.apps.register.views',
+    'activmusic.apps.uploadmgr.views',
+
+    url(r'^$', 'music_list', name='music_list'),
 )
