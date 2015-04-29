@@ -16,11 +16,12 @@ def playlist(request, slug):
 
     medias = list(AudioMedia.objects.filter(owner__playlist__slug=slug)
                   .exclude(file__isnull=True)
-                  .exclude(file=''))
+                  .exclude(file='')
+                  .select_related('owner'))
     shuffle(medias)
 
     output += ['#EXTINF:{},{}\r\n{}'.format(x.duration,
-                                            x.name,
+                                            '{} [{}]'.format(x.name, x.owner),
                                             request.build_absolute_uri(x.file.url))
                for x in medias]
 
