@@ -3,4 +3,6 @@
 # activmusic
 # (c) 2014 ActivKonnect
 
+from .common import *
+
 ALLOWED_HOSTS = ['*']
