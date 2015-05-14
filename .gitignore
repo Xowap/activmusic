@@ -19,6 +19,7 @@ build
 # Bower dependencies
 /activmusic/components
 /activmusic/assets
+/activmusic/media
 
 # SQLite3 database files:
 *.db
