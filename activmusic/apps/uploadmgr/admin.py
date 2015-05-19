@@ -10,7 +10,9 @@ from activmusic.apps.uploadmgr.models import AudioMedia, Playlist
 
 @admin.register(AudioMedia)
 class AudioMediaAdmin(admin.ModelAdmin):
-    list_display = ('url', 'owner', 'name')
+    list_display = ('url', 'owner', 'name', 'failed')
+    list_filter = ('failed',)
+    search_fields = ('url', 'owner__first_name', 'owner__last_name', 'name')
 
 
 @admin.register(Playlist)
