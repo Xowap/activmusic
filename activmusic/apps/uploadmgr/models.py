@@ -14,6 +14,7 @@ class AudioMedia(models.Model):
     name = models.CharField(max_length=1000, null=True, blank=True)
     file = models.FileField(null=True, blank=True, upload_to=upload_to)
     duration = models.IntegerField(null=True, blank=True)
+    failed = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name if self.name is not None and self.name != '' else self.url

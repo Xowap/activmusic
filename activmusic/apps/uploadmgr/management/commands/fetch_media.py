@@ -39,6 +39,7 @@ class Command(BaseCommand):
 
         ydl_opts = {
             'format': 'bestaudio/best',
+            'noplaylist': True,
             'postprocessors': [{
                 'key': 'FFmpegExtractAudio',
                 'preferredcodec': 'vorbis',
@@ -52,24 +53,33 @@ class Command(BaseCommand):
         try:
             chdir(dir_name)
 
-            for media in AudioMedia.objects.filter(Q(file__isnull=True) | Q(file='')):
+            for media in AudioMedia.objects\
+                    .filter(Q(file__isnull=True) | Q(file=''))\
+                    .filter(failed=False):
                 self.stdout.write('Downloading {}...'.format(media))
 
-                opts = dict(ydl_opts)
-                opts['outtmpl'] = '{}.%(ext)s'.format(media.pk)
-                opts['logger'] = MyLogger()
-                with YoutubeDL(opts) as ydl:
-                    result = ydl.extract_info(media.url)
+                # noinspection PyBroadException
+                try:
+                    opts = dict(ydl_opts)
+                    opts['outtmpl'] = '{}.%(ext)s'.format(media.pk)
+                    opts['logger'] = MyLogger()
+                    with YoutubeDL(opts) as ydl:
+                        result = ydl.extract_info(media.url)
 
-                    if not opts['logger'].has_error:
-                        name = '{}.ogg'.format(media.pk)
-                        with open(name, 'rb') as f:
-                            media.file.save('{}-{}.ogg'.format(
-                                media.pk,
-                                result.get('title')
-                            ), File(f))
-                        media.name = result.get('title')
-                        media.duration = result.get('duration')
-                        media.save()
+                        if not opts['logger'].has_error:
+                            name = '{}.ogg'.format(media.pk)
+                            with open(name, 'rb') as f:
+                                media.file.save('{}-{}.ogg'.format(
+                                    media.pk,
+                                    result.get('title')
+                                ), File(f))
+                            media.name = result.get('title')
+                            media.duration = result.get('duration')
+                            media.save()
+                        else:
+                            raise Exception
+                except:
+                    media.failed = True
+                    media.save()
         finally:
             rmtree(dir_name)
