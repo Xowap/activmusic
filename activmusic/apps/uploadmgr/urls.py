@@ -10,4 +10,5 @@ urlpatterns = patterns(
 
     url(r'^$', 'music_list', name='music_list'),
     url(r'^add/$', 'music_add', name='music_add'),
+    url(r'^delete/$', 'music_delete', name='music_delete'),
 )

@@ -49,3 +49,12 @@ def music_add(request):
     return render(request, 'uploadmgr/add.html', {
         'form': form
     })
+
+
+@login_required
+def music_delete(request):
+    if request.method == 'POST':
+        if request.POST.get('toDelete'):
+            AudioMedia.objects.filter(id__in=request.POST.getlist('toDelete')).delete()
+
+    return redirect('music_list')
