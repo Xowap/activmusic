@@ -5,14 +5,14 @@
 {% block content %}
     <h1>
         {% trans "My uploads" %}
-        <a href="{% url 'music_add' %}" class="btn btn-primary">Add Another</a>
+        <a href="{% url 'music_add' %}" class="btn btn-primary">{% trans 'Add Another' %}</a>
     </h1>
 
     {% for media in medias %}
     {% if forloop.first %}
     <form method="post">
         {% csrf_token %}
-        <button class="btn btn-danger">Remove all selected tracks</button>
+        <button class="btn btn-warning">{% trans 'Remove all selected tracks' %}</button>
         <table class="table">
             <tr>
                 <th>{% trans "Name" %}</th>
@@ -23,7 +23,7 @@
             <tr>
                 <td>{{ media.name|default:"[not downloaded yet]" }}</td>
                 <td><a href="{{ media.url }}" target="_blank">{{ media.url }}</a></td>
-                <td><input name="toDelete" value="{{ media.id }}" type="checkbox"/></td>
+                <td><input name="to-delete" value="{{ media.id }}" type="checkbox"/></td>
             </tr>
         {% if forloop.last %}
         </table>
