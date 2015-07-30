@@ -5,25 +5,29 @@
 {% block content %}
     <h1>
         {% trans "My uploads" %}
-        <a href="{% url 'music_add' %}" class="btn btn-primary">Add Another</a>
+        <a href="{% url 'music_add' %}" class="btn btn-primary">{% trans 'Add Another' %}</a>
     </h1>
 
     {% for media in medias %}
     {% if forloop.first %}
-    <table class="table">
-        <tr>
-            <th>{% trans "Name" %}</th>
-            <th>{% trans "URL" %}</th>
-            <th class="table-col-delete">{% trans "Delete" %}</th>
-        </tr>
-    {% endif %}
-        <tr>
-            <td>{{ media.name|default:"[not downloaded yet]" }}</td>
-            <td><a href="{{ media.url }}" target="_blank">{{ media.url }}</a></td>
-            <td><input type="checkbox"/></td>
-        </tr>
-    {% if forloop.last %}
-    </table>
+    <form method="post">
+        {% csrf_token %}
+        <button class="btn btn-warning">{% trans 'Remove all selected tracks' %}</button>
+        <table class="table">
+            <tr>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "URL" %}</th>
+                <th class="table-col-delete">{% trans "Delete" %}</th>
+            </tr>
+        {% endif %}
+            <tr>
+                <td>{{ media.name|default:"[not downloaded yet]" }}</td>
+                <td><a href="{{ media.url }}" target="_blank">{{ media.url }}</a></td>
+                <td><input name="to-delete" value="{{ media.id }}" type="checkbox"/></td>
+            </tr>
+        {% if forloop.last %}
+        </table>
+    </form>
     {% endif %}
     {% empty %}
         <p>{% trans "You don't have uploaded anything yet!" %}</p>
