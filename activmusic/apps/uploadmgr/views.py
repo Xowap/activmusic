@@ -30,6 +30,9 @@ def playlist(request, slug):
 
 @login_required
 def music_list(request):
+    if request.method == 'POST':
+        if request.POST.get('to-delete'):
+            AudioMedia.objects.filter(id__in=request.POST.getlist('to-delete')).delete()
     return render(request, 'uploadmgr/index.html', {
         'medias': AudioMedia.objects.filter(owner=request.user)
     })
